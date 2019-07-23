@@ -6,9 +6,11 @@ import java.util.*;
 public class Directory {
     File[] imageFiles;
     int imgFileCount;
+    String dirPath;
 
     public Directory(String dirPath) {
         File dirFolder = new File(dirPath);
+        this.dirPath = dirPath;
         
         FilenameFilter imgFileFilter = new FilenameFilter() {
             @Override
@@ -23,6 +25,10 @@ public class Directory {
 
         this.imageFiles = dirFolder.listFiles(imgFileFilter);
         this.imgFileCount = this.imageFiles.length;
+    }
+
+    public File[] getImageFiles() {
+        return this.imageFiles;
     }
 
     public void showFiles() {

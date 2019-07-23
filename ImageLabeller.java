@@ -1,12 +1,29 @@
 import com.imagelabeller.backend.*;
+import java.io.*;
 
 public class ImageLabeller {
     public static void main(String[] args) {
-        Directory obj = new Directory("./TestImages");
-        obj.showFiles();
-        obj.next(3);
-        obj.previous(3);
-        obj.next(5);
-        obj.previous(0);
+        Directory dirObj = new Directory("./TestImages");
+        dirObj.showFiles();
+        dirObj.next(3);
+        dirObj.previous(3);
+        dirObj.next(5);
+        dirObj.previous(0);
+
+        System.out.println("");
+
+        int[] albumPics = {1,3,5};
+        PhotoAlbum pa = new PhotoAlbum(dirObj, albumPics);
+        System.out.println(pa);
+        System.out.println("");
+
+        File newPic =  dirObj.getImageFiles()[4];
+        pa.addToAlbum(newPic);
+        System.out.println(pa);
+        System.out.println("");
+
+        pa.delFromAlbum(3);
+        System.out.println(pa);
+        System.out.println("");
     }
 }
