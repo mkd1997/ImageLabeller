@@ -33,6 +33,7 @@ public class PhotoAlbum {
         this.albumPhotos.remove(index);
     }
 
+    @Override
     public String toString() {
         String photoAlbumStr = "";
         photoAlbumStr += ("Path: " + this.albumPath + "\n");

@@ -41,7 +41,7 @@ public class Directory {
 
     public int next(int currentImage) {
         int nextImage = (currentImage + 1) % this.imgFileCount;
-        System.out.println(this.imageFiles[nextImage]);
+        System.out.println(this.imageFiles[nextImage].getName());
         return nextImage;
     }
 
@@ -49,11 +49,11 @@ public class Directory {
         int prevImage;
         if(currentImage <= 0) {
             prevImage = currentImage + this.imgFileCount -1;
-            System.out.println(this.imageFiles[prevImage]);
+            System.out.println(this.imageFiles[prevImage].getName());
             return prevImage;
         } else {
             prevImage = (currentImage - 1) % this.imgFileCount;
-            System.out.println(this.imageFiles[prevImage]);
+            System.out.println(this.imageFiles[prevImage].getName());
             return prevImage;
         }        
     }
