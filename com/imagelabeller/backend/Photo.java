@@ -11,6 +11,7 @@ public class Photo {
         this.caption = "";
     }
 
+    @Override
     public String toString() {
         String photoStr = "";
         photoStr += ("Name: " + this.name + "\n");
