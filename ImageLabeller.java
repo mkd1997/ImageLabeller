@@ -4,7 +4,7 @@ import java.io.*;
 public class ImageLabeller {
     public static void main(String[] args) {
         Directory dirObj = new Directory("./TestImages");
-        dirObj.showFiles();
+        dirObj.showFiles("size");
         dirObj.next(3);
         dirObj.previous(3);
         dirObj.next(5);
@@ -17,7 +17,7 @@ public class ImageLabeller {
         System.out.println(pa);
         System.out.println("");
 
-        File newPic =  dirObj.getImageFiles()[4];
+        File newPic =  dirObj.getImageFiles().get(4);
         pa.addToAlbum(newPic);
         System.out.println(pa);
         System.out.println("");

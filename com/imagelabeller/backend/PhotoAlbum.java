@@ -13,8 +13,8 @@ public class PhotoAlbum {
 
         this.albumPhotos = new ArrayList<Photo>();        
         for(int index : indexes) {
-            String name = dirObj.imageFiles[index].getName();
-            String path = dirObj.imageFiles[index].getPath();
+            String name = dirObj.imageFiles.get(index).getName();
+            String path = dirObj.imageFiles.get(index).getPath();
 
             Photo photoObj = new Photo(name, path);
             this.albumPhotos.add(photoObj);

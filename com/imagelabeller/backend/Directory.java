@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Directory {
-    File[] imageFiles;
+    ArrayList<File> imageFiles;
     int imgFileCount;
     String dirPath;
 
@@ -23,16 +23,29 @@ public class Directory {
             }
         };
 
-        this.imageFiles = dirFolder.listFiles(imgFileFilter);
-        this.imgFileCount = this.imageFiles.length;
+        this.imageFiles = new ArrayList<File>(Arrays.asList(dirFolder.listFiles(imgFileFilter)));
+        this.imgFileCount = this.imageFiles.size();
     }
 
-    public File[] getImageFiles() {
+    public ArrayList<File> getImageFiles() {
         return this.imageFiles;
     }
 
-    public void showFiles() {
+    public void showFiles(String sortBy) {
         int i = 0;
+        switch (sortBy) {
+            case "name":
+                Collections.sort(this.imageFiles, new FilenameComparator());
+                break;
+
+            case "size":
+                Collections.sort(this.imageFiles, new SizeComparator());
+                break;
+        
+            default:
+                Collections.sort(this.imageFiles, new FilenameComparator());
+                break;
+        }
         for(File imgFile : this.imageFiles) {
             System.out.println(i + ". " + imgFile.getName());
             i++;
@@ -41,7 +54,7 @@ public class Directory {
 
     public int next(int currentImage) {
         int nextImage = (currentImage + 1) % this.imgFileCount;
-        System.out.println(this.imageFiles[nextImage].getName());
+        System.out.println(this.imageFiles.get(nextImage).getName());
         return nextImage;
     }
 
@@ -49,17 +62,17 @@ public class Directory {
         int prevImage;
         if(currentImage <= 0) {
             prevImage = currentImage + this.imgFileCount -1;
-            System.out.println(this.imageFiles[prevImage].getName());
+            System.out.println(this.imageFiles.get(prevImage).getName());
             return prevImage;
         } else {
             prevImage = (currentImage - 1) % this.imgFileCount;
-            System.out.println(this.imageFiles[prevImage].getName());
+            System.out.println(this.imageFiles.get(prevImage).getName());
             return prevImage;
         }        
     }
 
-    public static void main(String[] args) {
-        Directory obj = new Directory(".");
-        obj.showFiles();        
-    }
+    // public static void main(String[] args) {
+    //     Directory obj = new Directory(".");
+    //     obj.showFiles();        
+    // }
 }
