@@ -5,10 +5,12 @@ import java.util.*;
 import java.io.*;
 
 public class PhotoAlbum {
+    String albumName;
     String albumPath;
     ArrayList<Photo> albumPhotos;    
 
-    public PhotoAlbum(Directory dirObj, int[] indexes) {
+    public PhotoAlbum(String albumName, Directory dirObj, int[] indexes) {
+        this.albumName = new String(albumName);
         this.albumPath = dirObj.dirPath;
 
         this.albumPhotos = new ArrayList<Photo>();        
@@ -33,9 +35,34 @@ public class PhotoAlbum {
         this.albumPhotos.remove(index);
     }
 
+    public void addCaptionToPhoto(int index, String caption) {
+        Photo photoObj = this.albumPhotos.get(index);
+        photoObj.caption = caption;
+    }
+
+    public void writeCaptionsToFile(String filepath) {
+        String photoAlbumStr = "";
+        photoAlbumStr += ("Album Name: " + this.albumName + "\n");
+        photoAlbumStr += ("Path: " + this.albumPath + "\n");
+        for(Photo pic : albumPhotos) {
+            if(pic.caption.equals("") == false) {
+                photoAlbumStr += (pic.toString() + "\n");
+            }            
+        }
+
+        try {
+            FileWriter fw = new FileWriter(filepath);
+            fw.write(photoAlbumStr);
+            fw.close();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @Override
     public String toString() {
         String photoAlbumStr = "";
+        photoAlbumStr += ("Album Name: " + this.albumName + "\n");
         photoAlbumStr += ("Path: " + this.albumPath + "\n");
         for(Photo pic : albumPhotos) {
             photoAlbumStr += (pic.toString() + "\n");
